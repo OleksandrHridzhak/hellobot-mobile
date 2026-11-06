@@ -1,4 +1,4 @@
-import * as Haptics from 'expo-haptics';
+import * as Haptics from '../../src/utils/haptics';
 import { CheckCircle2, ShieldCheck, Sparkles, X } from 'lucide-react-native';
 import React, { useState } from 'react';
 import {

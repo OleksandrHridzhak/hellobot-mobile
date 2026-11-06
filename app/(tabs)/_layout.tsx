@@ -1,4 +1,4 @@
-import * as Haptics from 'expo-haptics';
+import * as Haptics from '../../src/utils/haptics';
 import { Tabs } from 'expo-router';
 import {
   Heart,
@@ -29,6 +29,7 @@ export default function TabLayout() {
         tabBarInactiveTintColor: COLORS.textMuted,
         tabBarStyle: styles.tabBar,
         tabBarLabelStyle: styles.tabLabel,
+        tabBarItemStyle: styles.tabItem,
       }}
     >
       <Tabs.Screen
@@ -104,13 +105,37 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.bgPrimary,
     borderTopWidth: 1,
     borderTopColor: COLORS.border,
-    height: Platform.OS === 'ios' ? 86 : 66,
-    paddingTop: 8,
-    paddingBottom: Platform.OS === 'ios' ? 26 : 10,
+    height: Platform.OS === 'ios' ? 86 : Platform.OS === 'web' ? 68 : 64,
+    paddingTop: 6,
+    paddingBottom: Platform.OS === 'ios' ? 26 : Platform.OS === 'web' ? 8 : 6,
+    ...(Platform.OS === 'web'
+      ? {
+          position: 'fixed' as any,
+          left: '50%',
+          transform: [{ translateX: '-50%' }],
+          maxWidth: 480,
+          width: '100%',
+          borderLeftWidth: 1,
+          borderRightWidth: 1,
+          borderLeftColor: 'rgba(255, 255, 255, 0.1)',
+          borderRightColor: 'rgba(255, 255, 255, 0.1)',
+          zIndex: 100,
+        }
+      : {
+          maxWidth: 480,
+          width: '100%',
+          alignSelf: 'center',
+        }),
+  },
+  tabItem: {
+    paddingVertical: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   tabLabel: {
-    fontSize: 11,
+    fontSize: 10,
     fontWeight: '700',
+    lineHeight: 13,
     marginTop: 2,
   },
   activeIconWrap: {

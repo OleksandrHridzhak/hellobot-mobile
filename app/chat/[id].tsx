@@ -1,4 +1,4 @@
-import * as Haptics from 'expo-haptics';
+import * as Haptics from '../../src/utils/haptics';
 import { Image } from 'expo-image';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import {
@@ -40,6 +40,8 @@ import { useAppStore } from '../../src/store/useAppStore';
 import { COLORS, RADIUS, SPACING, TYPOGRAPHY } from '../../src/theme/theme';
 import { ChatMessage, QuickReplyOption } from '../../src/types';
 
+const EMPTY_MESSAGES: ChatMessage[] = [];
+
 export default function InteractiveChatRoomScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const roomId = id || 'llamama';
@@ -57,7 +59,7 @@ export default function InteractiveChatRoomScreen() {
     [roomId]
   );
 
-  const messages = useAppStore((s) => s.chatMessagesById[roomId] || []);
+  const messages = useAppStore((s) => s.chatMessagesById[roomId]) || EMPTY_MESSAGES;
   const currentStepId = useAppStore(
     (s) => s.currentStepById[roomId] || 'step_greeting'
   );

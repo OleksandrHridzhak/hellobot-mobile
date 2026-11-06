@@ -1,4 +1,4 @@
-import * as Haptics from 'expo-haptics';
+import * as Haptics from '../../src/utils/haptics';
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import { ChevronRight, FileText, Sparkles } from 'lucide-react-native';
